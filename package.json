@@ -1,0 +1,24 @@
+{
+  "name": "lending",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "@nomiclabs/hardhat-ethers": "^2.0.1",
+    "@nomiclabs/hardhat-waffle": "^2.0.1",
+    "chai": "^4.2.0",
+    "dotenv": "^8.2.0",
+    "ethereum-waffle": "^3.2.1",
+    "ethers": "^5.0.26",
+    "hardhat": "^2.0.8"
+  },
+  "dependencies": {
+    "@ethersproject/units": "^5.0.9",
+    "@openzeppelin/contracts": "^3.4.0",
+    "ethereumjs-abi": "^0.6.8"
+  },
+  "scripts": {
+    "deploy:kovan": "npx hardhat run --network kovan ./scripts/deploy.js",
+    "test:kovan": "npx hardhat test --network kovan"
+  }
+}
