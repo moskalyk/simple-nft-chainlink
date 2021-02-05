@@ -20,7 +20,7 @@ async function main() {
 
   // console.log("OracleClient deployed to:", oracle.address);
 
-  const oracleAddress = "0xFE6B58E149cae9efb2E2be65B633B5630221e5a7"
+  const oracleAddress = "0x84603f06d27e80f82A7aeC21a54160414C77E352"
   
   const NFTFactory = await ethers.getContractFactory("NFTFactory");
   const factory = await NFTFactory.deploy(oracleAddress);

@@ -1,8 +1,9 @@
-pragma experimental ABIEncoderV2;
+pragma solidity ^0.6.0;
 
 import {ERC721} from '@openzeppelin/contracts/token/ERC721/ERC721.sol';
 import {ECDSA} from '@openzeppelin/contracts/cryptography/ECDSA.sol';
 import {SafeMath} from '@openzeppelin/contracts/math/SafeMath.sol';
+import { IERC20 } from './Interfaces.sol';
 
 import './OracleClient.sol';
 
@@ -87,20 +88,28 @@ contract NFTFactory is ERC721 {
     	// Confirm the signature came from the owner, same as web3.eth.sign(...)
     	require(_owner == preFixedMessage.recover(_signature));
     	
-    	bioIndexes[_tokenId].redeemablePrice = oracleClient.getMultiplierEstimate();
+    	// bioIndexes[_tokenId].redeemablePrice = 
+    	// oracleClient.requestMultiplierPrice(_dataKey, 30);
 
     	// set nft URI
     	super._setTokenURI(_tokenId, _dataKey);
     	super.approve(address(this), _tokenId);
+    	super.transferFrom(tokenHolderByIndex[_tokenId], _buyer, _tokenId);
 
 		// return funds back to owner
 	}
 
-	function redeem(uint _tokenId) public {
+	function redeem(uint _tokenId, address _assetAddress, string memory _dataKey) public {
 		// TODO: transfer Bio NFT to land owner
+
 		require(bioIndexes[_tokenId].toBeOwner == msg.sender, "msg.sender must match toBeOwner");
 
-    	super.transferFrom(tokenHolderByIndex[_tokenId], msg.sender, _tokenId);
-    	
+		bioIndexes[_tokenId].redeemablePrice = 1 * oracleClient.getMultiplier(_dataKey);
+
+    	// super.approve(msg.sender, _tokenId);
+
+    	IERC20(_assetAddress).approve(address(this), bioIndexes[_tokenId].redeemablePrice);
+    	// super.transferFrom(address(this), msg.sender, _tokenId);
+
 	}
 }

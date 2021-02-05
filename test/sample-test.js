@@ -6,7 +6,11 @@ const { parseUnits, formatUnits } = require("@ethersproject/units");
 const { ethers } = require("hardhat");
 const abi = require('ethereumjs-abi');
 
-const nftFactoryAddress = '0x174520C40Da4A9eCdB64fD93c2E6F03E017CDD85'
+// change on deployment
+const nftFactoryAddress = '0x27F54ba285Bc72ea5851C11c25132Ba306c79FFc'
+
+const daiContractAddress = '0xFf795577d9AC8bD7D90Ee22b6C1703490b6512FD'
+
 let nftFactory;
 let signature;
 
@@ -69,13 +73,13 @@ describe("NFTFactory", function() {
 	// })
 	
 	// it('get the balance of the NFT', async() => {
-	// // it.only('get the balance of the NFT', async() => {
-	// 	const [owner] = await ethers.getSigners();
+	it.only('get the balance of the NFT for the nftFactoryAddress', async() => {
+		const [owner] = await ethers.getSigners();
 
-	// 	// get balanceOf
-	// 	const balance = await nftFactory.balanceOf(owner.address)
-	// 	console.log(balance.toString())
-	// })
+		// get balanceOf
+		const balance = await nftFactory.balanceOf(nftFactoryAddress)
+		console.log(balance.toString())
+	})
 
 	it('issues an nft and commitment', async () => {
 	// it.only('issues an nft and commitment', async () => {
@@ -96,9 +100,8 @@ describe("NFTFactory", function() {
 		// send raw data key
 	})
 
-
-	it('reveals an nft', async () => {
-	// it.only('reveals an nft', async () => {
+	// it('reveals an nft', async () => {
+	it.only('reveals an nft', async () => {
 		// sign media string
 		// deposit collateral with media string
 
@@ -122,8 +125,29 @@ describe("NFTFactory", function() {
 		// send raw data key
 	})
 
-	it('gets an nft', async () => {
-	// it.only('gets an nft', async () => {
+	// it('redeems an nft', async () => {
+	it.only('redeems an nft', async () => {
+		const [owner, borrower] = await ethers.getSigners();
+		
+		nftFactory = await ethers.getContractAt("NFTFactory", nftFactoryAddress, borrower);
+
+
+		console.log("signature")
+    	console.log(signature)
+		const bioTokenId = 0;
+
+		const res = await nftFactory.redeem(bioTokenId, daiContractAddress, dataKey)
+		console.log("TRANSFER")
+		console.log(res)
+
+		// get balanceOf
+		const balance = await nftFactory.balanceOf(owner.address)
+		console.log(balance.toString())
+	})
+
+
+	// it('gets an nft', async () => {
+	it.only('gets an nft', async () => {
 		// sign media string
 		// deposit collateral with media string
 
@@ -133,27 +157,12 @@ describe("NFTFactory", function() {
 		// get balanceOf
 		const bio = await nftFactory.bioIndexes(bioTokenId);
 		const uri = await nftFactory.tokenURI(bioTokenId);
+		console.log('bio.redeemablePrice.toString()')
+		console.log(bio)
 		console.log(bio.redeemablePrice.toString())
 		console.log(uri)
 
 		// send raw data key
-	})
-
-	// it('redeems an nft', async () => {
-	it.only('redeems an nft', async () => {
-		const [owner, borrower] = await ethers.getSigners();
-		nftFactory = await ethers.getContractAt("NFTFactory", nftFactoryAddress, borrower);
-
-
-		console.log("signature")
-    	console.log(signature)
-		const res = await nftFactory.redeem(0)
-		console.log("TRANSFER")
-		console.log(res)
-
-		// get balanceOf
-		const balance = await nftFactory.balanceOf(owner.address)
-		console.log(balance.toString())
 	})
 	
 })

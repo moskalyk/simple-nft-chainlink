@@ -2,6 +2,14 @@
 # yarn lockfile v1
 
 
+"@chainlink/contracts@^0.1.6":
+  version "0.1.6"
+  resolved "https://registry.yarnpkg.com/@chainlink/contracts/-/contracts-0.1.6.tgz#e4795565c723f99adaf6e97382cfb41dff0bcf91"
+  integrity sha512-RXKMm+3ADEi1c4/XsXy2Z1m0KQh7H6Nn0FWXmCgXRIorOBt7dvh52c0c41ONJfIhHB/tGeoXnp4lPnZEDqkocA==
+  optionalDependencies:
+    "@truffle/contract" "^4.2.29"
+    ethers "^4.0.45"
+
 "@ensdomains/ens@^0.4.4":
   version "0.4.5"
   resolved "https://registry.yarnpkg.com/@ensdomains/ens/-/ens-0.4.5.tgz#e0aebc005afdc066447c6e22feb4eda89a5edbfc"
@@ -653,7 +661,25 @@
     utf8 "^3.0.0"
     web3-utils "1.2.9"
 
-"@truffle/contract-schema@^3.2.5":
+"@truffle/codec@^0.9.5":
+  version "0.9.5"
+  resolved "https://registry.yarnpkg.com/@truffle/codec/-/codec-0.9.5.tgz#f12896e115524e85173ccd617cd3c8c562575acc"
+  integrity sha512-h5oT5y2FPCKLGo2bfRFyBJe2YWuA3CGnCuo4eD2omZy4y6uj2yO6IePJpDt2nEIxnvX6cUf26iLVy/Upq+W+Ag==
+  dependencies:
+    big.js "^5.2.2"
+    bn.js "^4.11.8"
+    cbor "^5.1.0"
+    debug "^4.1.0"
+    lodash.clonedeep "^4.5.0"
+    lodash.escaperegexp "^4.1.2"
+    lodash.partition "^4.6.0"
+    lodash.sum "^4.0.2"
+    semver "^6.3.0"
+    source-map-support "^0.5.19"
+    utf8 "^3.0.0"
+    web3-utils "1.2.9"
+
+"@truffle/contract-schema@^3.2.5", "@truffle/contract-schema@^3.3.3":
   version "3.3.3"
   resolved "https://registry.yarnpkg.com/@truffle/contract-schema/-/contract-schema-3.3.3.tgz#3e9567596d5dd9843df195cc3a874b83246c2505"
   integrity sha512-4bvcEoGycopJBPoCiqHP5Q72/1t/ixYS/pVHru+Rzvad641BgvoGrkd4YnyJ+E/MVb4ZLrndL7whmdGqV5B7SA==
@@ -661,6 +687,26 @@
     ajv "^6.10.0"
     crypto-js "^3.1.9-1"
     debug "^4.1.0"
+
+"@truffle/contract@^4.2.29":
+  version "4.3.6"
+  resolved "https://registry.yarnpkg.com/@truffle/contract/-/contract-4.3.6.tgz#e6a77ea8dd5c4832c41529313b0dfa092de65208"
+  integrity sha512-XcIZ4eG1BrkoW30ZYTEqQGskmB2a2CoFJOLDjo2heP8xx+mKAPI0ceg2Ym4PbBUtqPBL6CiWE2WRh2zpFWPrOw==
+  dependencies:
+    "@truffle/blockchain-utils" "^0.0.25"
+    "@truffle/contract-schema" "^3.3.3"
+    "@truffle/debug-utils" "^5.0.9"
+    "@truffle/error" "^0.0.11"
+    "@truffle/interface-adapter" "^0.4.18"
+    bignumber.js "^7.2.1"
+    ethereum-ens "^0.8.0"
+    ethers "^4.0.0-beta.1"
+    source-map-support "^0.5.19"
+    web3 "1.2.9"
+    web3-core-helpers "1.2.9"
+    web3-core-promievent "1.2.9"
+    web3-eth-abi "1.2.9"
+    web3-utils "1.2.9"
 
 "@truffle/debug-utils@^4.2.9":
   version "4.2.14"
@@ -674,12 +720,25 @@
     highlight.js "^9.15.8"
     highlightjs-solidity "^1.0.18"
 
+"@truffle/debug-utils@^5.0.9":
+  version "5.0.9"
+  resolved "https://registry.yarnpkg.com/@truffle/debug-utils/-/debug-utils-5.0.9.tgz#1daf5d99f8ada3f5167f3b899413c8f78cd68e9d"
+  integrity sha512-2wnof3sA1826KZYdHUm1PGQI/De/kNRwKECHI1+9iVLtutOLho/5rdSZVGM0hDPc2RPGBvivtgwpHsYe5Nxwjg==
+  dependencies:
+    "@truffle/codec" "^0.9.5"
+    "@trufflesuite/chromafi" "^2.2.2"
+    bn.js "^5.1.3"
+    chalk "^2.4.2"
+    debug "^4.1.0"
+    highlight.js "^10.4.0"
+    highlightjs-solidity "^1.0.21"
+
 "@truffle/error@^0.0.11":
   version "0.0.11"
   resolved "https://registry.yarnpkg.com/@truffle/error/-/error-0.0.11.tgz#2789c0042d7e796dcbb840c7a9b5d2bcd8e0e2d8"
   integrity sha512-ju6TucjlJkfYMmdraYY/IBJaFb+Sa+huhYtOoyOJ+G29KcgytUVnDzKGwC7Kgk6IsxQMm62Mc1E0GZzFbGGipw==
 
-"@truffle/interface-adapter@^0.4.16":
+"@truffle/interface-adapter@^0.4.16", "@truffle/interface-adapter@^0.4.18":
   version "0.4.18"
   resolved "https://registry.yarnpkg.com/@truffle/interface-adapter/-/interface-adapter-0.4.18.tgz#1aac45596997d208085d5168f82b990624610646"
   integrity sha512-P9JVSYD/CX3V+NgTWu+Bf71sLh8pMwrCpbiYRB93pRw/1H3ZTvt5iDC2MVvVxCs8FkSiy4OZzQK/DJ8+hXAmYw==
@@ -689,7 +748,7 @@
     source-map-support "^0.5.19"
     web3 "1.2.9"
 
-"@trufflesuite/chromafi@^2.2.1":
+"@trufflesuite/chromafi@^2.2.1", "@trufflesuite/chromafi@^2.2.2":
   version "2.2.2"
   resolved "https://registry.yarnpkg.com/@trufflesuite/chromafi/-/chromafi-2.2.2.tgz#d3fc507aa8504faffc50fb892cedcfe98ff57f77"
   integrity sha512-mItQwVBsb8qP/vaYHQ1kDt2vJLhjoEXJptT6y6fJGvFophMFhOI/NsTVUa0nJL1nyMeFiS6hSYuNVdpQZzB1gA==
@@ -1665,7 +1724,7 @@ big.js@^5.2.2:
   resolved "https://registry.yarnpkg.com/big.js/-/big.js-5.2.2.tgz#65f0af382f578bcdc742bd9c281e9cb2d7768328"
   integrity sha512-vyL2OymJxmarO8gxMr0mhChsO9QGwhynfuu4+MHTAW6czfq9humCB7rKpUjDd9YUiDPU4mzpyupFSvOClAwbmQ==
 
-bignumber.js@*, bignumber.js@^9.0.0:
+bignumber.js@*, bignumber.js@^9.0.0, bignumber.js@^9.0.1:
   version "9.0.1"
   resolved "https://registry.yarnpkg.com/bignumber.js/-/bignumber.js-9.0.1.tgz#8d7ba124c882bfd8e43260c67475518d0689e4e5"
   integrity sha512-IdZR9mh6ahOBv/hYGiXyVuyCetmGJhtYkqLBpTStdhEGjegpPlUawydyaF3pbIOFynJTpllEs+NP+CS9jKFLjA==
@@ -1716,7 +1775,7 @@ bn.js@^4.0.0, bn.js@^4.1.0, bn.js@^4.10.0, bn.js@^4.11.0, bn.js@^4.11.1, bn.js@^
   resolved "https://registry.yarnpkg.com/bn.js/-/bn.js-4.11.9.tgz#26d556829458f9d1e81fc48952493d0ba3507828"
   integrity sha512-E6QoYqCKZfgatHTdHzs1RRKP7ip4vvm+EyRUeE2RF0NblwVvb0p6jSVeNTOFxPn26QXN2o6SMfNxKp6kU8zQaw==
 
-bn.js@^5.0.0, bn.js@^5.1.1, bn.js@^5.1.2:
+bn.js@^5.0.0, bn.js@^5.1.1, bn.js@^5.1.2, bn.js@^5.1.3:
   version "5.1.3"
   resolved "https://registry.yarnpkg.com/bn.js/-/bn.js-5.1.3.tgz#beca005408f642ebebea80b042b4d18d2ac0ee6b"
   integrity sha512-GkTiFpjFtUzU9CbMeJ5iazkCzGL3jrhzerzZIuqLABjbwRaFt33I9tUdSNryIptM+RxDet6OKm2WnLXzW51KsQ==
@@ -1999,6 +2058,14 @@ caseless@~0.12.0:
   version "0.12.0"
   resolved "https://registry.yarnpkg.com/caseless/-/caseless-0.12.0.tgz#1b681c21ff84033c826543090689420d187151dc"
   integrity sha1-G2gcIf+EAzyCZUMJBolCDRhxUdw=
+
+cbor@^5.1.0:
+  version "5.2.0"
+  resolved "https://registry.yarnpkg.com/cbor/-/cbor-5.2.0.tgz#4cca67783ccd6de7b50ab4ed62636712f287a67c"
+  integrity sha512-5IMhi9e1QU76ppa5/ajP1BmMWZ2FHkhAhjeVKQ/EFCgYSEaeVaoGtL7cxJskf9oCCk+XjzaIdc3IuU/dbA/o2A==
+  dependencies:
+    bignumber.js "^9.0.1"
+    nofilter "^1.0.4"
 
 chai@^4.2.0:
   version "4.3.0"
@@ -3249,7 +3316,7 @@ ethereumjs-wallet@0.6.5:
     utf8 "^3.0.0"
     uuid "^3.3.2"
 
-ethers@^4.0.0-beta.1, ethers@^4.0.32:
+ethers@^4.0.0-beta.1, ethers@^4.0.32, ethers@^4.0.45:
   version "4.0.48"
   resolved "https://registry.yarnpkg.com/ethers/-/ethers-4.0.48.tgz#330c65b8133e112b0613156e57e92d9009d8fbbe"
   integrity sha512-sZD5K8H28dOrcidzx9f8KYh8083n5BexIO3+SbE4jK83L85FxtpXZBCQdXb8gkg+7sBqomcLhhkU7UHL+F7I2g==
@@ -4026,7 +4093,7 @@ heap@0.2.6:
   resolved "https://registry.yarnpkg.com/heap/-/heap-0.2.6.tgz#087e1f10b046932fc8594dd9e6d378afc9d1e5ac"
   integrity sha1-CH4fELBGky/IWU3Z5tN4r8nR5aw=
 
-highlight.js@^10.4.1:
+highlight.js@^10.4.0, highlight.js@^10.4.1:
   version "10.5.0"
   resolved "https://registry.yarnpkg.com/highlight.js/-/highlight.js-10.5.0.tgz#3f09fede6a865757378f2d9ebdcbc15ba268f98f"
   integrity sha512-xTmvd9HiIHR6L53TMC7TKolEj65zG1XU+Onr8oi86mYa+nLcIbxTTWkpW7CsEwv/vK7u1zb8alZIMLDqqN6KTw==
@@ -4036,7 +4103,7 @@ highlight.js@^9.15.8:
   resolved "https://registry.yarnpkg.com/highlight.js/-/highlight.js-9.18.5.tgz#d18a359867f378c138d6819edfc2a8acd5f29825"
   integrity sha512-a5bFyofd/BHCX52/8i8uJkjr9DYwXIPnM/plwI6W7ezItLGqzt7X2G2nXuYSfsIJdkwwj/g9DG1LkcGJI/dDoA==
 
-highlightjs-solidity@^1.0.18:
+highlightjs-solidity@^1.0.18, highlightjs-solidity@^1.0.21:
   version "1.0.21"
   resolved "https://registry.yarnpkg.com/highlightjs-solidity/-/highlightjs-solidity-1.0.21.tgz#6d257215b5b635231d4d0c523f2c419bbff6fe42"
   integrity sha512-ozOtTD986CBIxuIuauzz2lqCOTpd27TbfYm+msMtNSB69mJ0cdFNvZ6rOO5iFtEHtDkVYVEFQywXffG2sX3XTw==
@@ -5351,6 +5418,11 @@ node-gyp-build@^4.2.0:
   version "4.2.3"
   resolved "https://registry.yarnpkg.com/node-gyp-build/-/node-gyp-build-4.2.3.tgz#ce6277f853835f718829efb47db20f3e4d9c4739"
   integrity sha512-MN6ZpzmfNCRM+3t57PTJHgHyw/h4OWnZ6mR8P5j/uZtqQr46RRuDE/P+g3n0YR/AiYXeWixZZzaip77gdICfRg==
+
+nofilter@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/nofilter/-/nofilter-1.0.4.tgz#78d6f4b6a613e7ced8b015cec534625f7667006e"
+  integrity sha512-N8lidFp+fCz+TD51+haYdbDGrcBWwuHX40F5+z0qkUjMJ5Tp+rdSuAkMJ9N9eoolDlEVTf6u5icM+cNKkKW2mA==
 
 normalize-package-data@^2.3.2:
   version "2.5.0"

@@ -53,7 +53,7 @@ const KOVAN_PRIVATE_KEY = process.env.KOVAN_PRIVATE_KEY || '';
 const KOVAN_PRIVATE_KEY_B = process.env.KOVAN_PRIVATE_KEY_B || '';
 
 module.exports = {
-  solidity: "0.7.3",
+  solidity: "0.6.2",
   networks: {
     kovan: {
       url: `${ALCHEMY_URL}`,
