@@ -1,14 +1,36 @@
 require("@nomiclabs/hardhat-waffle");
+require("@nomiclabs/hardhat-web3");
+require("@nomiclabs/hardhat-truffle5");
 require('dotenv').config();
+
+const abi = require('ethereumjs-abi');
+
 
 // This is a sample Hardhat task. To learn how to create your own go to
 // https://hardhat.org/guides/create-task.html
-task("accounts", "Prints the list of accounts", async () => {
-  const accounts = await ethers.getSigners();
+task("sign", "tests signing a message", async (_, { web3 }) => {
+  const [owner] = await ethers.getSigners();
 
-  for (const account of accounts) {
-    console.log(account.address);
-  }
+  const [signer] = await web3.eth.getAccounts();
+
+  // let data = 'Some data'
+  
+  const data = "0x" + abi.soliditySHA3([
+        'address'
+      ], [
+        owner.address
+      ]).toString('Hex');
+
+  console.log()
+  let signature = web3.eth.accounts.sign(data, process.env.KOVAN_PRIVATE_KEY)
+  console.log("signature web3")
+  console.log(signature)
+  console.log("signature ethers")
+  console.log(await owner.signMessage(data))
+
+  // for (const account of accounts) {
+  //   console.log(account.address);
+  // }
 });
 
 // You need to export an object to set up your config

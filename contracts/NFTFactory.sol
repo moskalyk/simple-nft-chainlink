@@ -39,7 +39,7 @@ contract NFTFactory is ERC721 {
 	}
 
     // function 
-    function issueNFTCommitment(address owner, uint depositAmount, uint weeksAfter, bytes memory dataHash, string memory tokenUri) public {
+    function issueNFTCommitment(address owner, address _buyer, uint depositAmount, uint weeksAfter, bytes memory dataHash, string memory tokenUri) public {
     	// bio NFT to delegator, and land to 
     	uint tokenId = super.totalSupply();
     	uint tokenIdLand = tokenId + 1;
@@ -51,7 +51,7 @@ contract NFTFactory is ERC721 {
     	// require(cap <= 0.5)
 
     	// creates the bio nft
-    	Bio memory bio = Bio(tokenId, price, owner, dataHash);
+    	Bio memory bio = Bio(tokenId, price, _buyer, dataHash);
     	// Bio memory bio = Bio(tokenId, price.mul(2).div(10), owner, dataHash);
     	bioIndexes[tokenId] = bio;
 
@@ -77,42 +77,30 @@ contract NFTFactory is ERC721 {
     }
 
     // function reveal(address owner, uint tokenId, string memory tokenKey, bytes memory signature, address buyer) public view returns (uint) {
-    function reveal(address owner, uint tokenId, string memory tokenKey, bytes memory _signature, address buyer) public view returns (address) {
-		// get hash,
-		// unpack & see that it equals
-		// check to ensure key
-		// emit in an event
-		// emit Reveal(owner, tokenKey);
+    function reveal(address _owner, uint _tokenId, string memory _dataKey, bytes memory _signature, address _buyer) public {
 
-		bytes32 message = keccak256(abi.encodePacked(owner));
+		emit Reveal(_owner, _dataKey);
+
+		bytes32 message = keccak256(abi.encodePacked(_owner, _dataKey, _buyer));
    		bytes32 preFixedMessage = message.toEthSignedMessageHash();
     
     	// Confirm the signature came from the owner, same as web3.eth.sign(...)
-    	// require(owner == preFixedMessage.recover(signature));
-    	// return preFixedMessage.recover(signature);
+    	require(_owner == preFixedMessage.recover(_signature));
     	
-    	return ECDSA.recover(preFixedMessage, _signature);
-
-		// return oracleClient.getMultiplierEstimate();
-
+    	bioIndexes[_tokenId].redeemablePrice = oracleClient.getMultiplierEstimate();
 
     	// set nft URI
+    	super._setTokenURI(_tokenId, _dataKey);
+    	super.approve(address(this), _tokenId);
 
-    	// super._setTokenURI(tokenId, tokenKey);
-    	// super.approve(buyer, tokenId);
-
-		// makeTransfer
 		// return funds back to owner
-
 	}
 
-	function redeem(uint tokenId, bytes memory _dataKey) public {
+	function redeem(uint _tokenId) public {
 		// TODO: transfer Bio NFT to land owner
-		require(bioIndexes[tokenId].toBeOwner == msg.sender, "msg.sender must match toBeOwner");
+		require(bioIndexes[_tokenId].toBeOwner == msg.sender, "msg.sender must match toBeOwner");
 
-    	super.transferFrom(tokenHolderByIndex[tokenId], msg.sender, tokenId);
-
-		// Claim and record the nonce
-    	// require(super.claim(_tokenURI, _sig, address(this)), "Signature is invalid");
+    	super.transferFrom(tokenHolderByIndex[_tokenId], msg.sender, _tokenId);
+    	
 	}
 }
