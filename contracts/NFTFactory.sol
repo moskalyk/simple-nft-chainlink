@@ -94,6 +94,7 @@ contract NFTFactory is ERC721 {
     	// set nft URI
     	super._setTokenURI(_tokenId, _dataKey);
     	super.approve(address(this), _tokenId);
+
     	super.transferFrom(tokenHolderByIndex[_tokenId], _buyer, _tokenId);
 
 		// return funds back to owner
@@ -108,7 +109,8 @@ contract NFTFactory is ERC721 {
 
     	// super.approve(msg.sender, _tokenId);
 
-    	IERC20(_assetAddress).approve(address(this), bioIndexes[_tokenId].redeemablePrice);
+    	// IERC20(_assetAddress).approve(address(this), bioIndexes[_tokenId].redeemablePrice);
+        // IERC20(_assetAddress).transfer(landIndexes[tokenIdLand + 1], bioIndexes[_tokenId].redeemablePrice);
     	// super.transferFrom(address(this), msg.sender, _tokenId);
 
 	}
